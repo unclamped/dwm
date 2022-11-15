@@ -1,26 +1,16 @@
 --- dwm.c
 +++ dwm.c
-@@ -185,6 +185,7 @@ static void monocle(Monitor *m);
- static void motionnotify(XEvent *e);
- static void movemouse(const Arg *arg);
- static Client *nexttiled(Client *c);
-+static void opacity(Client *c, double opacity);
- static void pop(Client *);
- static void propertynotify(XEvent *e);
- static void quit(const Arg *arg);
-@@ -212,6 +213,7 @@ static void tagmon(const Arg *arg);
- static void tile(Monitor *);
- static void togglebar(const Arg *arg);
- static void togglefloating(const Arg *arg);
-+static void toggleopacity(const Arg *arg);
- static void toggletag(const Arg *arg);
- static void toggleview(const Arg *arg);
- static void unfocus(Client *c, int setfocus);
-@@ -1576,6 +1591,7 @@ setup(void)
- 	netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
- 	netatom[NetWMWindowTypeDialog] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
- 	netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
-+	netatom[NetWMWindowsOpacity] = XInternAtom(dpy, "_NET_WM_WINDOW_OPACITY", False);
- 	/* init cursors */
- 	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
- 	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
+@@ -248,13 +246,11 @@ static void (*handler[LASTEvent]) (XEvent *) = {
+ 	[ConfigureRequest] = configurerequest,
+ 	[ConfigureNotify] = configurenotify,
+ 	[DestroyNotify] = destroynotify,
+-	[EnterNotify] = enternotify,
+ 	[Expose] = expose,
+ 	[FocusIn] = focusin,
+ 	[KeyPress] = keypress,
+ 	[MappingNotify] = mappingnotify,
+ 	[MapRequest] = maprequest,
+-	[MotionNotify] = motionnotify,
+ 	[PropertyNotify] = propertynotify,
+ 	[UnmapNotify] = unmapnotify
+ };
