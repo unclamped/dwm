@@ -1,16 +1,19 @@
---- dwm.c
-+++ dwm.c
-@@ -248,13 +246,11 @@ static void (*handler[LASTEvent]) (XEvent *) = {
- 	[ConfigureRequest] = configurerequest,
- 	[ConfigureNotify] = configurenotify,
- 	[DestroyNotify] = destroynotify,
--	[EnterNotify] = enternotify,
- 	[Expose] = expose,
- 	[FocusIn] = focusin,
- 	[KeyPress] = keypress,
- 	[MappingNotify] = mappingnotify,
- 	[MapRequest] = maprequest,
--	[MotionNotify] = motionnotify,
- 	[PropertyNotify] = propertynotify,
- 	[UnmapNotify] = unmapnotify
- };
+--- dwm.c	2021-02-27 21:17:53.862314811 -0600
++++ dwm.c	2021-02-28 00:23:19.232865766 -0600
+@@ -122,6 +125,8 @@ struct Monitor {
+ 	int by;               /* bar geometry */
+ 	int mx, my, mw, mh;   /* screen size */
+ 	int wx, wy, ww, wh;   /* window area  */
++	int gappx;	      /* gaps between windows */
++	int drawwithgaps;     /* toggle gaps */
+ 	unsigned int seltags;
+ 	unsigned int sellt;
+ 	unsigned int tagset[2];
+@@ -203,6 +208,7 @@ static void sendmon(Client *c, Monitor *
+ static void setclientstate(Client *c, long state);
+ static void setfocus(Client *c);
+ static void setfullscreen(Client *c, int fullscreen);
++static void setgaps(const Arg *arg);
+ static void setlayout(const Arg *arg);
+ static void setmfact(const Arg *arg);
+ static void setup(void);
