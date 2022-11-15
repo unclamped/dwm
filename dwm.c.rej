@@ -1,0 +1,10 @@
+--- dwm.c
++++ dwm.c
+@@ -1064,6 +1072,7 @@ manage(Window w, XWindowAttributes *wa)
+ 	updatewindowtype(c);
+ 	updatesizehints(c);
+ 	updatewmhints(c);
++	updatemotifhints(c);
+ 	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
+ 	grabbuttons(c, 0);
+ 	if (!c->isfloating)
