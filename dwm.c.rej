@@ -1,19 +1,19 @@
---- dwm.c	2021-02-27 21:17:53.862314811 -0600
-+++ dwm.c	2021-02-28 00:23:19.232865766 -0600
-@@ -122,6 +125,8 @@ struct Monitor {
- 	int by;               /* bar geometry */
- 	int mx, my, mw, mh;   /* screen size */
- 	int wx, wy, ww, wh;   /* window area  */
-+	int gappx;	      /* gaps between windows */
-+	int drawwithgaps;     /* toggle gaps */
- 	unsigned int seltags;
- 	unsigned int sellt;
- 	unsigned int tagset[2];
-@@ -203,6 +208,7 @@ static void sendmon(Client *c, Monitor *
- static void setclientstate(Client *c, long state);
- static void setfocus(Client *c);
- static void setfullscreen(Client *c, int fullscreen);
-+static void setgaps(const Arg *arg);
- static void setlayout(const Arg *arg);
- static void setmfact(const Arg *arg);
- static void setup(void);
+--- dwm.c
++++ dwm.c
+@@ -725,13 +731,12 @@ drawbar(Monitor *m)
+ 	}
+ 	x = 0;
+ 	for (i = 0; i < LENGTH(tags); i++) {
++		/* Do not draw vacant tags */
++		if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
++			continue;
+ 		w = TEXTW(tags[i]);
+ 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
+ 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
+-		if (occ & 1 << i)
+-			drw_rect(drw, x + boxs, boxs, boxw, boxw,
+-				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
+-				urg & 1 << i);
+ 		x += w;
+ 	}
+ 	w = blw = TEXTW(m->ltsymbol);
