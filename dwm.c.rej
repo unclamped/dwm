@@ -1,10 +1,11 @@
 --- dwm.c
 +++ dwm.c
-@@ -93,6 +93,7 @@ struct Client {
+@@ -92,7 +92,7 @@ struct Client {
+ 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
  	int bw, oldbw;
  	unsigned int tags;
- 	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
-+	int issteam;
+-	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
++	int isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, ignoretransient;
  	Client *next;
  	Client *snext;
  	Monitor *mon;
