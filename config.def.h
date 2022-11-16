@@ -10,7 +10,7 @@ static const unsigned int maxHTab 			= 200;	/* tab menu height */
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const int startwithgaps	     = 0;	 /* 1 means gaps are used by default */
+static const int startwithgaps	     = 1;	 /* 1 means gaps are used by default */
 static const unsigned int gappx     = 10;       /* default gap between windows in pixels */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -19,7 +19,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 #define ICONSPACING 5 /* space between icon and title */
 static const int focusonwheel       = 0;
 static const double activeopacity   = 1.0f;     /* Window opacity when it's focused (0 <= opacity <= 1) */
-static const double inactiveopacity = 0.875f;   /* Window opacity when it's inactive (0 <= opacity <= 1) */
+static const double inactiveopacity = 0.5f;   /* Window opacity when it's inactive (0 <= opacity <= 1) */
 static       Bool bUseOpacity       = True;     /* Starts with opacity on any unfocused windows */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
@@ -37,7 +37,7 @@ static const char *colors[][3]      = {
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const char *tagsalt[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-static const char *defaulttagapps[] = { "st", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
+static const char *defaulttagapps[] = { "alacritty", NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
 static const int momentaryalttags = 0; /* 1 means alttags will show only when key is held down*/
 
 static const Rule rules[] = {
