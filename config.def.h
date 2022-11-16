@@ -15,6 +15,8 @@ static const unsigned int gappx     = 10;       /* default gap between windows i
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+#define ICONSIZE 16   /* icon size */
++#define ICONSPACING 5 /* space between icon and title */
 static const int focusonwheel       = 0;
 static const double activeopacity   = 1.0f;     /* Window opacity when it's focused (0 <= opacity <= 1) */
 static const double inactiveopacity = 0.875f;   /* Window opacity when it's inactive (0 <= opacity <= 1) */
