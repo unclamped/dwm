@@ -85,7 +85,8 @@ static const char *layoutmenu_cmd = "layoutmenu.sh";
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+/*	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } }, */
+	{ MODKEY,                       XK_p,      spawn,          {.v = roficmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ SUPERKEY,                     XK_d,      spawn,          {.v = roficmd } },
 	{ MODKEY,                       XK_s,      spawndefault,   {0} },
