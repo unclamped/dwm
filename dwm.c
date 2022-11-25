@@ -165,6 +165,7 @@ typedef struct {
 	int isfloating;
 	int monitor;
 	int ignoretransient;
+	int unmanaged;
 } Rule;
 
 /* function declarations */
@@ -287,6 +288,7 @@ static char stext[256];
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh;               /* bar height */
+static int unmanaged = 0     /* whether the window manager should manage the new window or not */
 static int lrpad;            /* sum of left and right padding for text */
 static int (*xerrorxlib)(Display *, XErrorEvent *);
 static unsigned int numlockmask = 0;
@@ -352,6 +354,7 @@ applyrules(Client *c)
 			c->isfloating = r->isfloating;
 			c->ignoretransient = r->ignoretransient;
 			c->tags |= r->tags;
+			unmanaged = r->unmanaged;
 			for (m = mons; m && m->num != r->monitor; m = m->next);
 			if (m)
 				c->mon = m;
@@ -1211,6 +1214,17 @@ manage(Window w, XWindowAttributes *wa)
 	} else {
 		c->mon = selmon;
 		applyrules(c);
+	}
+
+	if (unmanaged) {
+		XMapWindow(dpy, c->win);
+		if (unmanaged == 1)
+			XRaiseWindow(dpy, c->win);
+		else if (unmanaged == 2)
+			XLowerWindow(dpy, c->win);
+		free(c);
+		unmanaged = 0;
+		return;
 	}
 
 	if (c->x + WIDTH(c) > c->mon->wx + c->mon->ww)
