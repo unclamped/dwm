@@ -288,7 +288,7 @@ static char stext[256];
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
 static int bh;               /* bar height */
-static int unmanaged = 0     /* whether the window manager should manage the new window or not */
+static int unmanaged = 0;    /* whether the window manager should manage the new window or not */
 static int lrpad;            /* sum of left and right padding for text */
 static int (*xerrorxlib)(Display *, XErrorEvent *);
 static unsigned int numlockmask = 0;
